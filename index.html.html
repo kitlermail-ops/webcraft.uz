@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebCraft — Professional Websites From $100</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0A0A0A; --white: #F5F2EE; --accent: #C8FF00;
+    --mid: #1A1A1A; --card: #141414; --border: rgba(255,255,255,0.08);
+    --muted: #888; --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 5%; background: rgba(10,10,10,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); gap: 1rem; }
+  .logo { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--white); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+
+  .lang-switcher { display: flex; align-items: center; gap: 2px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 100px; padding: 3px; }
+  .lang-btn { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; color: var(--muted); background: none; border: none; cursor: pointer; padding: 0.3rem 0.75rem; border-radius: 100px; transition: all 0.2s; letter-spacing: 0.04em; }
+  .lang-btn:hover { color: var(--white); }
+  .lang-btn.active { background: var(--accent); color: var(--black); }
+
+  nav a.cta-nav { font-family: var(--font-head); font-size: 0.85rem; font-weight: 600; color: var(--black); background: var(--accent); padding: 0.5rem 1.2rem; border-radius: 100px; text-decoration: none; transition: opacity 0.2s; white-space: nowrap; }
+  nav a.cta-nav:hover { opacity: 0.85; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 5% 5rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(200,255,0,0.06) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(200,255,0,0.04) 0%, transparent 60%); pointer-events: none; }
+  .hero-grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+
+  .badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-weight: 500; color: var(--accent); border: 1px solid rgba(200,255,0,0.25); background: rgba(200,255,0,0.06); padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 2rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.7); } }
+
+  .hero h1 { font-family: var(--font-head); font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.04em; max-width: 900px; margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted); font-weight: 300; max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+  .hero-actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: var(--black); font-family: var(--font-head); font-size: 1rem; font-weight: 700; padding: 0.9rem 2.2rem; border-radius: 100px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,255,0,0.25); }
+  .btn-secondary { font-family: var(--font-head); font-size: 0.95rem; font-weight: 600; color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .btn-secondary:hover { color: var(--white); border-color: var(--white); }
+
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; flex-wrap: wrap; padding-top: 3rem; border-top: 1px solid var(--border); }
+  .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-num { font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--white); line-height: 1; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.85rem; color: var(--muted); font-weight: 300; }
+
+  section { padding: 6rem 5%; }
+  .section-tag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .section-title { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem; max-width: 700px; }
+  .section-sub { color: var(--muted); font-weight: 300; max-width: 520px; line-height: 1.7; }
+
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; margin-top: 4rem; background: var(--border); border: 1px solid var(--border); }
+  .why-card { background: var(--black); padding: 2.5rem; position: relative; overflow: hidden; transition: background 0.3s; }
+  .why-card:hover { background: var(--card); }
+  .why-card::before { content: ''; position: absolute; top: 0; left: 0; width: 40px; height: 2px; background: var(--accent); transition: width 0.4s; }
+  .why-card:hover::before { width: 100%; }
+  .why-num { font-family: var(--font-head); font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 1.5rem; }
+  .why-icon { width: 44px; height: 44px; background: rgba(200,255,0,0.08); border: 1px solid rgba(200,255,0,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem; }
+  .why-card h3 { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--white); }
+  .why-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  .process-section { background: var(--mid); }
+  .process-list { margin-top: 4rem; display: flex; flex-direction: column; max-width: 800px; }
+  .process-item { display: grid; grid-template-columns: 60px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); align-items: start; transition: transform 0.2s; }
+  .process-item:first-child { border-top: 1px solid var(--border); }
+  .process-item:hover { transform: translateX(8px); }
+  .process-step { font-family: var(--font-head); font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; opacity: 0.5; }
+  .process-content h3 { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .process-content p { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+  .perks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 4rem; }
+  .perk { padding: 1.75rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.3s; }
+  .perk:hover { border-color: rgba(200,255,0,0.2); }
+  .perk-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .perk h4 { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--white); }
+  .perk p { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+
+  .cta-section { text-align: center; position: relative; overflow: hidden; background: var(--mid); padding: 7rem 5%; }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(200,255,0,0.07) 0%, transparent 70%); pointer-events: none; }
+  .big-price { font-family: var(--font-head); font-size: clamp(5rem, 18vw, 14rem); font-weight: 800; line-height: 1; letter-spacing: -0.05em; color: rgba(255,255,255,0.05); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; white-space: nowrap; }
+  .cta-section > * { position: relative; }
+  .cta-section h2 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; line-height: 1.1; }
+  .cta-section h2 em { font-style: normal; color: var(--accent); }
+  .cta-section p { color: var(--muted); font-weight: 300; margin-bottom: 2.5rem; font-size: 1rem; }
+  .telegram-btn { display: inline-flex; align-items: center; gap: 0.75rem; background: #229ED9; color: #fff; font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; padding: 1rem 2.5rem; border-radius: 100px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+  .telegram-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(34,158,217,0.35); }
+  .telegram-btn svg { width: 22px; height: 22px; }
+
+  footer { padding: 2.5rem 5%; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  footer p { font-size: 0.82rem; color: var(--muted); font-weight: 300; }
+  footer a { font-size: 0.82rem; color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 600px) {
+    .hero-stats { gap: 1.5rem; }
+    .process-item { grid-template-columns: 40px 1fr; gap: 1rem; }
+    .process-step { font-size: 1.8rem; }
+    nav a.cta-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Web<span>Craft</span></a>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" onclick="setLang('uz')">UZ</button>
+    </div>
+    <a href="https://t.me/TheUsername1939" target="_blank" class="cta-nav" data-i18n="nav_cta">Contact on Telegram →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="badge" data-i18n="hero_badge">Professional Web Design Studio</div>
+  <h1 data-i18n="hero_h1">Websites that<br><em>actually</em><br>sell.</h1>
+  <p class="hero-sub" data-i18n="hero_sub">We build fast, beautiful, conversion-focused websites starting at just <strong style="color:var(--white)">$100</strong>. Designed by professionals. Delivered on time.</p>
+  <div class="hero-actions">
+    <a href="https://t.me/TheUsername1939" target="_blank" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.88 13.977l-2.968-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.276.582z"/></svg>
+      <span data-i18n="hero_cta">Get Started Free</span>
+    </a>
+    <a href="#why" class="btn-secondary" data-i18n="hero_cta2">See why us ↓</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">100<span>+</span></div><div class="stat-label" data-i18n="stat1">Websites delivered</div></div>
+    <div class="stat-item"><div class="stat-num">48<span>h</span></div><div class="stat-label" data-i18n="stat2">Average turnaround</div></div>
+    <div class="stat-item"><div class="stat-num"><span>$</span>100</div><div class="stat-label" data-i18n="stat3">Starting price</div></div>
+    <div class="stat-item"><div class="stat-num">5<span>★</span></div><div class="stat-label" data-i18n="stat4">Client satisfaction</div></div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="section-tag" data-i18n="why_tag">Why choose us</div>
+  <h2 class="section-title" data-i18n="why_title">Everything you need,<br>nothing you don't.</h2>
+  <p class="section-sub" data-i18n="why_sub">We skip the agency bloat and deliver exactly what your business needs — fast and professionally.</p>
+  <div class="why-grid">
+    <div class="why-card fade-up"><div class="why-num">01</div><div class="why-icon">🎨</div><h3 data-i18n="why1_title">Pro designers & developers</h3><p data-i18n="why1_body">Our team consists of experienced designers and programmers who build real, polished products — not templates.</p></div>
+    <div class="why-card fade-up"><div class="why-num">02</div><div class="why-icon">⚡</div><h3 data-i18n="why2_title">Lightning fast delivery</h3><p data-i18n="why2_body">Most projects are completed in 24–72 hours. We respect your time and move with urgency.</p></div>
+    <div class="why-card fade-up"><div class="why-num">03</div><div class="why-icon">💰</div><h3 data-i18n="why3_title">Transparent $100 pricing</h3><p data-i18n="why3_body">No hidden fees, no surprise invoices. One fair price that gets you a professional website, period.</p></div>
+    <div class="why-card fade-up"><div class="why-num">04</div><div class="why-icon">📱</div><h3 data-i18n="why4_title">Mobile-first & modern</h3><p data-i18n="why4_body">Every website we build looks flawless on every screen size — phones, tablets, and desktops.</p></div>
+    <div class="why-card fade-up"><div class="why-num">05</div><div class="why-icon">🔍</div><h3 data-i18n="why5_title">SEO-ready from day one</h3><p data-i18n="why5_body">We build with search engines in mind, so your site gets found by the people who matter.</p></div>
+    <div class="why-card fade-up"><div class="why-num">06</div><div class="why-icon">🛡️</div><h3 data-i18n="why6_title">Revisions until you love it</h3><p data-i18n="why6_body">We don't deliver and disappear. We iterate until you're completely happy with the result.</p></div>
+  </div>
+</section>
+
+<section class="process-section">
+  <div class="section-tag" data-i18n="proc_tag">How it works</div>
+  <h2 class="section-title" data-i18n="proc_title">Simple. Fast. Done.</h2>
+  <p class="section-sub" data-i18n="proc_sub">From first message to live website — our process is designed to be completely painless.</p>
+  <div class="process-list">
+    <div class="process-item fade-up"><div class="process-step">01</div><div class="process-content"><h3 data-i18n="proc1_title">Tell us about your project</h3><p data-i18n="proc1_body">Reach out on Telegram and share your vision. What do you do, who's your audience, what vibe are you going for? The more you share, the better we build.</p></div></div>
+    <div class="process-item fade-up"><div class="process-step">02</div><div class="process-content"><h3 data-i18n="proc2_title">We design & build</h3><p data-i18n="proc2_body">Our designers craft the visual concept while our developers bring it to life. You'll receive updates and can provide feedback throughout.</p></div></div>
+    <div class="process-item fade-up"><div class="process-step">03</div><div class="process-content"><h3 data-i18n="proc3_title">Review & refine</h3><p data-i18n="proc3_body">You review the first version. We refine it based on your feedback until it's exactly what you had in mind.</p></div></div>
+    <div class="process-item fade-up"><div class="process-step">04</div><div class="process-content"><h3 data-i18n="proc4_title">Go live 🚀</h3><p data-i18n="proc4_body">We hand over all files, assist with deployment if needed, and your new website is live and ready to work for you.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-tag" data-i18n="perks_tag">What's included</div>
+  <h2 class="section-title" data-i18n="perks_title">$100 gets you a lot.</h2>
+  <p class="section-sub" data-i18n="perks_sub">Here's exactly what comes with every single website we build.</p>
+  <div class="perks-grid">
+    <div class="perk fade-up"><div class="perk-icon">🖥️</div><h4 data-i18n="perk1_title">Custom design</h4><p data-i18n="perk1_body">Not a template. A unique site built around your brand and goals.</p></div>
+    <div class="perk fade-up"><div class="perk-icon">📐</div><h4 data-i18n="perk2_title">Responsive layout</h4><p data-i18n="perk2_body">Looks perfect on every device — mobile, tablet, and desktop.</p></div>
+    <div class="perk fade-up"><div class="perk-icon">🔎</div><h4 data-i18n="perk3_title">Basic SEO setup</h4><p data-i18n="perk3_body">Proper meta tags, page speed, and structure for Google.</p></div>
+    <div class="perk fade-up"><div class="perk-icon">⚙️</div><h4 data-i18n="perk4_title">Full source files</h4><p data-i18n="perk4_body">You own everything. We hand over all code and assets.</p></div>
+    <div class="perk fade-up"><div class="perk-icon">🔄</div><h4 data-i18n="perk5_title">Free revisions</h4><p data-i18n="perk5_body">We tweak until you're satisfied. No extra charge.</p></div>
+    <div class="perk fade-up"><div class="perk-icon">💬</div><h4 data-i18n="perk6_title">Telegram support</h4><p data-i18n="perk6_body">Direct line to us. No ticketing systems, no bots.</p></div>
+    <div class="perk fade-up"><div class="perk-icon">🚀</div><h4 data-i18n="perk7_title">Fast turnaround</h4><p data-i18n="perk7_body">Most sites delivered within 48–72 hours of project start.</p></div>
+    <div class="perk fade-up"><div class="perk-icon">🔒</div><h4 data-i18n="perk8_title">SSL & security ready</h4><p data-i18n="perk8_body">Built to be hosted securely with HTTPS from day one.</p></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="big-price">$100</div>
+  <div class="badge" style="margin-bottom:1.5rem" data-i18n="cta_badge">Ready to start?</div>
+  <h2 data-i18n="cta_title">Your website is<br>one message <em>away.</em></h2>
+  <p data-i18n="cta_sub">Reach out on Telegram and let's talk about your project — no pressure, no commitment.</p>
+  <a href="https://t.me/TheUsername1939" target="_blank" class="telegram-btn">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.88 13.977l-2.968-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.276.582z"/></svg>
+    <span data-i18n="cta_btn">Message us on Telegram</span>
+  </a>
+</section>
+
+<footer>
+  <a href="#" class="logo" style="font-size:1rem">Web<span style="color:var(--accent)">Craft</span></a>
+  <p data-i18n="footer_copy">Professional websites from $100 · Built with care</p>
+  <a href="https://t.me/TheUsername1939" target="_blank">@TheUsername1939</a>
+</footer>
+
+<script>
+const T = {
+  en: {
+    nav_cta:"Contact on Telegram →",
+    hero_badge:"Professional Web Design Studio",
+    hero_h1:"Websites that<br><em>actually</em><br>sell.",
+    hero_sub:`We build fast, beautiful, conversion-focused websites starting at just <strong style="color:var(--white)">$100</strong>. Designed by professionals. Delivered on time.`,
+    hero_cta:"Get Started Free", hero_cta2:"See why us ↓",
+    stat1:"Websites delivered", stat2:"Average turnaround", stat3:"Starting price", stat4:"Client satisfaction",
+    why_tag:"Why choose us", why_title:"Everything you need,<br>nothing you don't.",
+    why_sub:"We skip the agency bloat and deliver exactly what your business needs — fast and professionally.",
+    why1_title:"Pro designers & developers", why1_body:"Our team consists of experienced designers and programmers who build real, polished products — not templates.",
+    why2_title:"Lightning fast delivery", why2_body:"Most projects are completed in 24–72 hours. We respect your time and move with urgency.",
+    why3_title:"Transparent $100 pricing", why3_body:"No hidden fees, no surprise invoices. One fair price that gets you a professional website, period.",
+    why4_title:"Mobile-first & modern", why4_body:"Every website we build looks flawless on every screen size — phones, tablets, and desktops.",
+    why5_title:"SEO-ready from day one", why5_body:"We build with search engines in mind, so your site gets found by the people who matter.",
+    why6_title:"Revisions until you love it", why6_body:"We don't deliver and disappear. We iterate until you're completely happy with the result.",
+    proc_tag:"How it works", proc_title:"Simple. Fast. Done.",
+    proc_sub:"From first message to live website — our process is designed to be completely painless.",
+    proc1_title:"Tell us about your project", proc1_body:"Reach out on Telegram and share your vision. What do you do, who's your audience, what vibe are you going for? The more you share, the better we build.",
+    proc2_title:"We design & build", proc2_body:"Our designers craft the visual concept while our developers bring it to life. You'll receive updates and can provide feedback throughout.",
+    proc3_title:"Review & refine", proc3_body:"You review the first version. We refine it based on your feedback until it's exactly what you had in mind.",
+    proc4_title:"Go live 🚀", proc4_body:"We hand over all files, assist with deployment if needed, and your new website is live and ready to work for you.",
+    perks_tag:"What's included", perks_title:"$100 gets you a lot.", perks_sub:"Here's exactly what comes with every single website we build.",
+    perk1_title:"Custom design", perk1_body:"Not a template. A unique site built around your brand and goals.",
+    perk2_title:"Responsive layout", perk2_body:"Looks perfect on every device — mobile, tablet, and desktop.",
+    perk3_title:"Basic SEO setup", perk3_body:"Proper meta tags, page speed, and structure for Google.",
+    perk4_title:"Full source files", perk4_body:"You own everything. We hand over all code and assets.",
+    perk5_title:"Free revisions", perk5_body:"We tweak until you're satisfied. No extra charge.",
+    perk6_title:"Telegram support", perk6_body:"Direct line to us. No ticketing systems, no bots.",
+    perk7_title:"Fast turnaround", perk7_body:"Most sites delivered within 48–72 hours of project start.",
+    perk8_title:"SSL & security ready", perk8_body:"Built to be hosted securely with HTTPS from day one.",
+    cta_badge:"Ready to start?", cta_title:"Your website is<br>one message <em>away.</em>",
+    cta_sub:"Reach out on Telegram and let's talk about your project — no pressure, no commitment.",
+    cta_btn:"Message us on Telegram",
+    footer_copy:"Professional websites from $100 · Built with care"
+  },
+  ru: {
+    nav_cta:"Написать в Telegram →",
+    hero_badge:"Профессиональная студия веб-дизайна",
+    hero_h1:"Сайты, которые<br><em>реально</em><br>продают.",
+    hero_sub:`Создаём быстрые, красивые сайты с фокусом на конверсию — от <strong style="color:var(--white)">$100</strong>. Профессиональный дизайн. Доставка вовремя.`,
+    hero_cta:"Начать бесплатно", hero_cta2:"Почему мы ↓",
+    stat1:"Сайтов создано", stat2:"Среднее время", stat3:"Стартовая цена", stat4:"Довольных клиентов",
+    why_tag:"Почему мы", why_title:"Всё, что нужно,<br>ничего лишнего.",
+    why_sub:"Работаем без бюрократии и делаем именно то, что нужно вашему бизнесу — быстро и профессионально.",
+    why1_title:"Проф. дизайнеры и разработчики", why1_body:"Наша команда — опытные дизайнеры и программисты, создающие настоящие продукты, а не шаблоны.",
+    why2_title:"Молниеносная доставка", why2_body:"Большинство проектов завершается за 24–72 часа. Мы уважаем ваше время.",
+    why3_title:"Честная цена — $100", why3_body:"Никаких скрытых платежей. Одна честная цена — и вы получаете профессиональный сайт.",
+    why4_title:"Mobile-first и современно", why4_body:"Каждый наш сайт идеально выглядит на любом устройстве — телефоне, планшете и компьютере.",
+    why5_title:"SEO с первого дня", why5_body:"Строим с учётом поисковых систем, чтобы ваш сайт находили нужные люди.",
+    why6_title:"Правки, пока не понравится", why6_body:"Мы не исчезаем после сдачи. Дорабатываем, пока вы не будете полностью довольны.",
+    proc_tag:"Как это работает", proc_title:"Просто. Быстро. Готово.",
+    proc_sub:"От первого сообщения до живого сайта — процесс полностью без боли.",
+    proc1_title:"Расскажите о проекте", proc1_body:"Напишите в Telegram и поделитесь видением. Чем больше расскажете — тем лучше результат.",
+    proc2_title:"Мы проектируем и строим", proc2_body:"Дизайнеры создают концепцию, разработчики воплощают её. Вы получаете обновления и даёте обратную связь.",
+    proc3_title:"Проверяете и уточняете", proc3_body:"Смотрите первую версию. Дорабатываем по вашим комментариям.",
+    proc4_title:"Запускаем 🚀", proc4_body:"Передаём все файлы, помогаем с размещением — и ваш сайт работает.",
+    perks_tag:"Что включено", perks_title:"За $100 вы получаете многое.", perks_sub:"Вот что входит в каждый сайт, который мы делаем.",
+    perk1_title:"Уникальный дизайн", perk1_body:"Не шаблон. Сайт под ваш бренд и цели.",
+    perk2_title:"Адаптивная вёрстка", perk2_body:"Идеально на любом устройстве — телефон, планшет, компьютер.",
+    perk3_title:"Базовое SEO", perk3_body:"Правильные мета-теги, скорость и структура для Google.",
+    perk4_title:"Исходный код", perk4_body:"Всё ваше. Передаём весь код и материалы.",
+    perk5_title:"Бесплатные правки", perk5_body:"Дорабатываем до полного удовлетворения. Без доплат.",
+    perk6_title:"Поддержка в Telegram", perk6_body:"Прямая связь с нами. Без тикетов и ботов.",
+    perk7_title:"Быстрая доставка", perk7_body:"Большинство сайтов готово через 48–72 часа после старта.",
+    perk8_title:"SSL и безопасность", perk8_body:"Сайт готов к хостингу с HTTPS с первого дня.",
+    cta_badge:"Готовы начать?", cta_title:"Ваш сайт — всего одно<br>сообщение <em>от вас.</em>",
+    cta_sub:"Напишите в Telegram — обсудим проект без давления и обязательств.",
+    cta_btn:"Написать в Telegram",
+    footer_copy:"Профессиональные сайты от $100 · Сделано с душой"
+  },
+  uz: {
+    nav_cta:"Telegram orqali yozing →",
+    hero_badge:"Professional veb-dizayn studiyasi",
+    hero_h1:"Haqiqatan<br><em>sotadigan</em><br>saytlar.",
+    hero_sub:`Tez, chiroyli va konversiyaga yo'naltirilgan saytlar yaratamiz — atigi <strong style="color:var(--white)">$100</strong> dan. Professionalar tomonidan. O'z vaqtida.`,
+    hero_cta:"Bepul boshlash", hero_cta2:"Nega biz ↓",
+    stat1:"Yaratilgan saytlar", stat2:"O'rtacha muddat", stat3:"Boshlang'ich narx", stat4:"Mamnun mijozlar",
+    why_tag:"Nega biz", why_title:"Kerak bo'lgan hamma narsa,<br>ortiqcha hech narsa yo'q.",
+    why_sub:"Ortiqcha byurokratiyasiz, biznesingizga kerak bo'lgan narsani tez va professional tarzda yetkazamiz.",
+    why1_title:"Pro dizaynerlar va dasturchilar", why1_body:"Jamoamiz — real, sifatli mahsulotlar yaratadigan tajribali mutaxassislardan iborat.",
+    why2_title:"Tez yetkazib berish", why2_body:"Ko'pchilik loyihalar 24–72 soat ichida tugallanadi. Vaqtingizni qadrlashimiz muhim.",
+    why3_title:"Ochiq narx — $100", why3_body:"Yashirin to'lovlar yo'q. Bir adolatli narx — va siz professional sayt olasiz.",
+    why4_title:"Mobile-first va zamonaviy", why4_body:"Har bir saytimiz barcha qurilmalarda — telefon, planshet va kompyuterda mukammal ko'rinadi.",
+    why5_title:"SEO birinchi kundan", why5_body:"Qidiruv tizimlari hisobga olinib quramiz, siz kerakli odamlar tomonidan topilasiz.",
+    why6_title:"Yoqquncha o'zgartiramiz", why6_body:"Topshirib ketmaymiz. Siz to'liq mamnun bo'lguningizcha davom etamiz.",
+    proc_tag:"Qanday ishlaydi", proc_title:"Oddiy. Tez. Tayyor.",
+    proc_sub:"Birinchi xabardan jonli saytgacha — jarayonimiz butunlay og'riqsiz.",
+    proc1_title:"Loyiha haqida aytib bering", proc1_body:"Telegram orqali murojaat qiling va tasavvuringizni baham ko'ring. Qancha ko'p aytсangiz — shuncha yaxshi natija.",
+    proc2_title:"Dizayn va qurilish", proc2_body:"Dizaynerlar vizual kontseptsiyani yaratadi, dasturchilar uni hayotga tatbiq etadi.",
+    proc3_title:"Ko'rib chiqish va takomillashtirish", proc3_body:"Birinchi versiyani ko'rib chiqasiz. Izohlaringiz asosida takomillashtiramiz.",
+    proc4_title:"Ishga tushirish 🚀", proc4_body:"Barcha fayllarni topshiramiz, joylashtirish bo'yicha yordam beramiz — saytingiz tayyor.",
+    perks_tag:"Nima kiradi", perks_title:"$100 ga ko'p narsa olasiz.", perks_sub:"Biz quradigan har bir saytga kiradigan narsalar.",
+    perk1_title:"Maxsus dizayn", perk1_body:"Shablon emas. Brendingiz va maqsadlaringizga moslashtirilgan noyob sayt.",
+    perk2_title:"Adaptiv joylashuv", perk2_body:"Har qanday qurilmada mukammal ko'rinish.",
+    perk3_title:"Asosiy SEO sozlamasi", perk3_body:"Google uchun to'g'ri meta teglar, tezlik va tuzilma.",
+    perk4_title:"To'liq manba fayllar", perk4_body:"Hammasi sizniki. Barcha kod va materiallarni topshiramiz.",
+    perk5_title:"Bepul o'zgartirishlar", perk5_body:"Mamnun bo'lguningizcha tahrir qilamiz. Qo'shimcha to'lovsiz.",
+    perk6_title:"Telegram orqali yordam", perk6_body:"Biz bilan to'g'ridan-to'g'ri muloqot. Tiket va botlarsiz.",
+    perk7_title:"Tez yetkazish", perk7_body:"Ko'p saytlar 48–72 soat ichida tayyor.",
+    perk8_title:"SSL va xavfsizlik", perk8_body:"Birinchi kundan HTTPS bilan xavfsiz joylashtirish uchun tayyor.",
+    cta_badge:"Boshlashga tayyormisiz?", cta_title:"Saytingiz bitta<br>xabar <em>uzoqda.</em>",
+    cta_sub:"Telegram orqali yozing — loyihangiz haqida bosim va majburiyatsiz gaplashamiz.",
+    cta_btn:"Telegram orqali yozing",
+    footer_copy:"Professional saytlar $100 dan · Mehr bilan yaratilgan"
+  }
+};
+
+function setLang(lang) {
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
+  document.documentElement.lang = lang;
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
